@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-b8jw6v(ezu_idl*@*y!7436ob3tti*z&ghwi_w2u^h$vpm=gvw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1', 'localhost']
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/'
@@ -82,8 +83,12 @@ WSGI_APPLICATION = 'puddle.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': '3fBc1fB4F*6fDdfA1ebCdAcB2AfFe2AD',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '59742'
     }
 }
 
@@ -123,8 +128,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'  # BASE is already mentioned above by default
+MEDIA_ROOT = BASE_DIR/'media'  # BASE is already mentioned above by default
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
