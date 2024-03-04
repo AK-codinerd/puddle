@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+<!--making the base in base.html and importing it here -->
+
+<!--so we used here jinja and wherever we needed to update certain things like title we used block title and here we wrote whatever necessary we needed to write and the same goes for the body with block content-->
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+    <div class="mt-6 px-6 py-12 bg-orange-200 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">My items</h2>
+        <div class="grid grid-cols-3 gap-3">
+            {% for item in items %}
+                <div>
+                    <a href="{% url 'item:detail' item.id %}"> <!-- HENCE WE WROTE THE APP_NAME = "ITEM" in ITEM/VIEWS.PY then we should give here 'app_name:function_name' -->
+                        <div>
+                            <img style="aspect-ratio: 3/2" src="{{ item.image.url }}" alt="{{ item.name }}" class="rounded-t-xl">
+                        </div>
+                        <div class="p-6 bg-black bg-blackrounded-b-xl">
+                             <h2 class="text-2xl text-white">{{ item.name }}</h2>
+                             <p class="text-green-500">₹{{ item.price }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
